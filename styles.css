@@ -1,0 +1,268 @@
+@import url('https://fonts.googleapis.com/css2?family=Spartan:wght@700&display=swap');
+
+:root {
+    --bg_transition : background 350ms linear;
+    --txt_color_transition : color 200ms ease;
+ }
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Spartan', sans-serif;
+    transition: var(--bg_transition);
+    transition: var(--txt_color_transition);
+}
+
+body.theme-1 {
+    --main_bg: hsl(222, 26%, 31%);
+    --keypad_bg: hsl(223, 31%, 20%);
+    --output_screen: hsl(224, 36%, 15%);
+
+    /* keys */
+    --dlt_key_bg: hsl(225, 21%, 49%);
+    --dlt_key_shadow: hsl(224, 28%, 35%);
+
+    --equals_key_bg: hsl(6, 63%, 50%);
+    --equals_key_shadow: hsl(6, 70%, 34%);
+
+    --number_key_bg: hsl(30, 25%, 89%);
+    --number_key_shadow: hsl(28, 16%, 65%);
+
+    /* text */
+    --text_color_drk: hsl(221, 14%, 31%);
+    --text_color_light : hsl(0, 0%, 100%);
+}
+
+body.theme-2 {
+    --main_bg: hsl(0, 0%, 90%);
+    --keypad_bg: hsl(0, 5%, 81%);
+    --output_screen: hsl(0, 0%, 93%);
+
+    /* keys */
+    --dlt_key_bg: hsl(185, 42%, 37%);
+    --dlt_key_shadow: hsl(185, 58%, 25%);
+
+    --equals_key_bg: hsl(25, 98%, 40%);
+    --equals_key_shadow: hsl(25, 99%, 27%);
+
+    --number_key_bg: hsl(45, 7%, 89%);
+    --number_key_shadow: hsl(35, 11%, 61%);
+
+    /* text */
+    --text_color_drk: hsl(60, 10%, 19%);
+    --text_color_light : hsl(0, 0%, 100%);
+}
+
+body.theme-3 {
+    --main_bg: hsl(268, 75%, 9%);
+    --keypad_bg: hsl(268, 71%, 12%);
+    --output_screen: hsl(268, 71%, 12%);
+
+    /* keys */
+    --dlt_key_bg: hsl(281, 89%, 26%);
+    --dlt_key_shadow: hsl(285, 91%, 52%);
+
+    --equals_key_bg: hsl(176, 100%, 44%);
+    --equals_key_shadow: hsl(177, 92%, 70%);
+
+    --number_key_bg: hsl(268, 47%, 21%);
+    --number_key_shadow: hsl(290, 70%, 36%);
+
+    /* text */
+    --text_color_drk: hsl(52, 100%, 62%);
+    --text_color_light : hsl(0, 0%, 100%);
+}
+
+body {
+    width: 100%;
+    min-height: 100vh;
+    background-color: var(--main_bg);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1.5rem;
+    transition: background 350ms linear,
+}
+/* calculator_container */
+.calculator_container {
+    width: 100%;
+    max-width: 540px;
+    min-height: 600px;
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+    color: var(--text_color_light);
+}
+
+.theme-2 .calculator_container, .theme-2 .theme_selector .themes button {
+    color: var(--text_color_drk);
+}
+.theme-3 .calculator_container, .theme-3 .theme_selector .themes button {
+    color: var(--text_color_drk);
+}
+.theme-3 .equals_btn {
+    color: hsl(198, 20%, 13%);
+}
+/* calculator_header */
+.calculator_header {
+    height: 48px;
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 6px;
+    /* border: 1px solid greenyellow; */
+}
+.calculator_header > .title {
+    font-size: 30px;
+    align-self: flex-end;
+    transform: translateY(5px);
+}
+.theme_selector {
+    display: flex;
+    gap: 22px;
+}
+.theme_selector .title {
+    align-self: flex-end;
+    font-size: 12px;
+    text-transform: uppercase;
+}
+.theme_selector .themes {
+    width: 75px;
+    height: 100%;
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+}
+.theme_selector .themes button {
+    border: none;
+    outline: none;
+    cursor: pointer;
+    height: 100%;
+    background-color: transparent;
+    color: var(--text_color_light);
+    display: flex;
+    justify-content: center;
+    z-index: 1;
+    /* border: 1px solid greenyellow; */
+}
+#theme_cheker {
+    width: 100%;
+    height: 25px;
+    position: absolute;
+    background-color: var(--keypad_bg);
+    bottom: -5px;
+    border-radius: 50px;
+}
+#checker_ball {
+    width: 17px;
+    height: 17px;
+    background-color: var(--equals_key_bg);
+    border-radius: 50%;
+    position: absolute;
+    top: 4px;
+    left: 5px;
+    transform: translateX(0);
+    transition: transform 350ms linear;
+}
+.theme-1 #checker_ball {
+    /* left: 5px; */
+    transform: translateX(0);
+}
+.theme-2 #checker_ball {
+    transform: translateX(25px);
+}
+.theme-3 #checker_ball {
+    transform: translateX(49px);
+    transition: transform 450ms linear;
+}
+/* calculator_output */
+.calculator_output {
+    width: 100%;
+    height: 90px;
+    background-color: var(--output_screen);
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    font-size: 32px;
+    padding: 28px;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.blink {
+    animation: blink 1.1s step-end infinite;
+}
+
+@keyframes blink {
+    0% {
+        opacity: 0;
+    }
+    50% {
+        opacity: 0.5;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+/* calculator_grid */
+.calculator_grid {
+    background-color: var(--keypad_bg);
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(5, 60px);
+    justify-content: center;
+    align-content: center;
+    row-gap: 18px;
+    column-gap: 14px;
+    padding: 26px;
+    border-radius: 12px;
+}
+.calculator_grid button {
+    cursor: pointer;
+    border: none;
+    outline: none;
+    font-size: 24px;
+    border-radius: 8px;
+    color: var(--text_color_light);
+    transition: var(--txt_color_transition);
+}
+
+/* .calculator_grid button:hover {
+    transform: scale(0.95);
+}  */
+.calculator_grid .span-two {
+    grid-column: span 2;
+}
+
+.calculator_grid .numbers , .calculator_grid .operator {
+    background-color: var(--number_key_bg);
+    color: var(--text_color_drk);
+    box-shadow: 0 5px var(--number_key_shadow);
+}
+
+.calculator_grid .delte_btn, .calculator_grid .rest_btn {
+    font-size: 1rem;
+    text-transform: uppercase;
+    background-color: var(--dlt_key_bg);
+    box-shadow: 0 5px var(--dlt_key_shadow);
+}
+
+.calculator_grid .equals_btn {
+    background-color: var(--equals_key_bg);
+    box-shadow: 0 5px var(--equals_key_shadow);
+}
+
+@media screen and (min-width: 600px){
+    .calculator_container {
+        gap: 24px;
+    }
+    .calculator_output {
+        height: 130px;
+        font-size: 44px;
+    }
+    .calculator_grid {
+        column-gap: 24px;
+        row-gap: 29px;
+        padding: 34px;
+    }
+}
